@@ -1,0 +1,19 @@
+# Claves WiFi y secretos locales. Nunca se suben.
+secrets.h
+*.env
+.env
+
+# Compilación de Arduino y PlatformIO
+build/
+.pio/
+*.elf
+*.bin
+*.hex
+
+# Editores
+.vscode/
+.idea/
+
+# Windows
+Thumbs.db
+Desktop.ini
