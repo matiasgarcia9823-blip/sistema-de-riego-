@@ -1,3 +1,7 @@
+# Borrador
+
+El registro vigente está en [docs/registro.md](../docs/registro.md). Este archivo se conserva como borrador.
+
 # Registro de desarrollo
 
 Aquí queda cada problema que aparezca al construir el prototipo: qué falló, por qué, qué se cambió, a qué comportamiento afectó y con qué prueba se comprobó. El historial de GitHub conserva el mismo relato, un commit por etapa o por corrección.

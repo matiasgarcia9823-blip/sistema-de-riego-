@@ -51,4 +51,4 @@ El relé es un interruptor de potencia aislado: la bobina se alimenta a 5 V desd
 
 ## Qué queda fuera de esta etapa
 
-El firmware, la simulación y el diagrama de conexión llegan en los commits siguientes. La aplicación Android no forma parte de la EVA1.
+El firmware de los dos nodos, la simulación en `simulacion_pruebas/` y el diagrama de conexión en [conexion](conexion.md) forman parte de esta entrega. La aplicación Android no forma parte de la EVA1.

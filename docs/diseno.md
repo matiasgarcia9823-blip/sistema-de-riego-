@@ -30,3 +30,7 @@ Umbral temperatura: 24
 ```
 
 Cuando el sensor marca falla, la humedad o la temperatura se muestran como `SIN LECTURA` y el riego queda en `OFF`. Cuando el enlace supera los 5 segundos, el control muestra `SIN ENLACE CON EL CAMPO` y deja de dar por válido el último estado de la bomba.
+
+## Conexión del prototipo
+
+El cableado de los dos ESP32, los sensores y el relé está en [conexion](conexion.md).

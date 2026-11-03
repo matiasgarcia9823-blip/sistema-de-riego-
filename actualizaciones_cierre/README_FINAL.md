@@ -1,3 +1,7 @@
+# Borrador
+
+La entrega vigente está en el [README de la raíz](../README.md), en [docs/registro.md](../docs/registro.md) y en [docs/conexion.md](../docs/conexion.md). Este archivo se conserva como borrador de esa redacción.
+
 # Sistema de agricultura de precisión
 
 Monitoreo de humedad de sustrato y temperatura, con activación de riego.

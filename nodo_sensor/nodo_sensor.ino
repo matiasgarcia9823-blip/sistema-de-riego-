@@ -28,7 +28,8 @@ const bool RELE_ACTIVO_BAJO = true;
 const uint8_t DHT_TIPO = DHT22;
 
 // Calibracion del capacitivo v1.2 a 3,3 V. El ADC no es el porcentaje:
-// en seco el voltaje es alto y en agua es bajo.
+// en seco el voltaje es alto y en agua es bajo. El monitor imprime
+// "ADC suelo": el de aire reemplaza a SUELO_SECO_ADC y el de agua a SUELO_AGUA_ADC.
 const int SUELO_SECO_ADC = 2800;
 const int SUELO_AGUA_ADC = 1200;
 const int SUELO_CORTE_BAJO = 100;
@@ -133,6 +134,8 @@ int leerHumedadSuelo() {
     suma += analogRead(PIN_SUELO);
   }
   int adc = (int)(suma / 8);
+  Serial.print("ADC suelo ");
+  Serial.println(adc);
 
   if (adc <= SUELO_CORTE_BAJO || adc >= SUELO_CORTE_ALTO) {
     return -1;
