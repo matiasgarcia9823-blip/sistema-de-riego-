@@ -1,0 +1,26 @@
+name: eva2-garcia-diaz
+seed: 1
+duration: 120s
+environment: { preset: indoor_office }
+nodes:
+  - id: nodo
+    board: esp32
+    firmware: ./firmware
+    position: [0, 0]
+    radios: [{ phy: wifi, channel: 5 }]
+  - id: phone
+    board: android
+    position: [6, 0]
+    radios: [{ phy: wifi, channel: 5 }]
+    android:
+      avd: pixel8
+      apk: ./app/build/outputs/apk/debug/app-debug.apk
+      package: cl.inacap.riego
+      activity: .MainActivity
+      extras: { board_url: "http://192.168.4.11/", usuario: "demo" }
+assertions:
+  - serial: { node: nodo, contains: "http listening on 80", within: 30s }
+  - serial: { node: phone, contains: "-> 200 ACK;UMBRAL", within: 60s }
+  - serial: { node: phone, contains: "-> 200 ACK;ACT:ON", within: 80s }
+  - serial: { node: nodo, contains: "cmd OK ACT:ON", within: 80s }
+  - serial: { node: nodo, contains: "seguridad RECHAZADO", within: 100s }

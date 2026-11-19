@@ -1,5 +1,8 @@
 # Claves WiFi y secretos locales. Nunca se suben.
 secrets.h
+
+# Guía, bitácora y material que no va al repositorio público.
+DOCS NO SUBIR/
 *.env
 .env
 
@@ -9,6 +12,14 @@ build/
 *.elf
 *.bin
 *.hex
+
+# Android
+local.properties
+.gradle/
+*.apk
+*.ap_
+.cxx/
+captures/
 
 # Editores
 .vscode/
