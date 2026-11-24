@@ -31,10 +31,17 @@ Se fijó el caso, la regla de riego, el hardware y el protocolo antes de escribi
 | 3 | 2026-10-23 | Firmware del nodo de control: WiFi, TCP, latido y consola | Antonio Díaz Fontanilla |
 | 4 | 2026-10-23 | Simulador TCP en localhost y matriz de tramas | Antonio Díaz Fontanilla |
 | 5 | 2026-11-02 | README de entrega, diagrama de conexión y este registro | Antonio Díaz Fontanilla |
+| 6 | 2026-11-23 | App Android, firmware HTTP, wrapper de Gradle y simulador de la EVA2 | Matías García Pinda y Antonio Díaz Fontanilla |
 
 ## Decisiones que no se volvieron a abrir
 
 La bomba se enciende en automático solo si la humedad está bajo el umbral y la temperatura está en el umbral o por encima. Esos valores arrancan en 40 y 24. El relé del GPIO 26 es activo en bajo y la bomba arranca apagada. El ciclo de lectura es de 2 segundos con `millis()`, porque el DHT22 no admite lecturas más seguidas. El checksum es el XOR del contenido, en dos hexadecimales mayúsculas. El carácter `$` o `#` y el asterisco no entran en la cuenta.
+
+## EVA2
+
+La app reemplaza al nodo de control. El enlace pasa a HTTP en el puerto 80: la lectura es `LEC;humedad;umbral;ON|OFF;checksum` y cada orden lleva HMAC-SHA256 más un contador que solo crece. La temperatura no entra en este mensaje.
+
+El protocolo se comprueba con `python simulacion_pruebas/simulador_http.py`. La última línea es `PRUEBAS OK`. Hertzbench, que necesita Linux con KVM, se corre con `sh simulacion_pruebas/correr_eva2.sh nombre_del_segundo_avd` y tiene que dejar dos archivos cuya última línea sea `RESULT: PASS`.
 
 ## Incidentes
 
@@ -48,3 +55,5 @@ La bomba se enciende en automático solo si la humedad está bajo el umbral y la
 | 2026-10-23 | Encender a mano con el sensor roto inundaría sin medida | No había lectura válida | `#M,1` y `#M,0` responden `$ER,SENSOR` y la bomba sigue apagada | El modo manual queda bloqueado mientras falta la lectura | P12 |
 | 2026-11-02 | El README de la raíz seguía con las etapas 4 y 5 pendientes, y no había diagrama | El cierre estaba solo en `actualizaciones_cierre/` | La entrega queda en `README.md`, este registro y [conexion](conexion.md) | Quien abre el repositorio ve el cierre y el cableado | Revisión de esos tres archivos |
 | 2026-11-02 | No se podía calibrar el capacitivo: el sketch solo publicaba el porcentaje | `leerHumedadSuelo()` no mostraba las cuentas del ADC | Cada ciclo imprime `ADC suelo` antes de calcular el porcentaje | El valor de aire y el de agua se copian a las dos constantes | Revisión de `leerHumedadSuelo()` en `nodo_sensor.ino` |
+| 2026-11-23 | `gradlew assembleDebug` no existía en el repositorio | Solo estaba `gradle-wrapper.properties` | Quedaron `gradlew`, `gradlew.bat` y `gradle-wrapper.jar` de Gradle 8.9 | El APK se arma con el comando del README cuando hay JDK y Android SDK | Revisión de esos tres archivos |
+| 2026-11-23 | La EVA2 no tenía una corrida repetible del protocolo HTTP | La matriz de `simulador_tcp.py` cubre solo el TCP de la EVA1 | `simulador_http.py` revisa checksum, HMAC, 401, 409, automático y la cola offline | Una firma mala no mueve el contador y el contador repetido no mueve la bomba | H1–H15, última línea `PRUEBAS OK` |

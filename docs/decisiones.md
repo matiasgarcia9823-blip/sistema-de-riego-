@@ -27,7 +27,7 @@ El ESP32 trae ADC de 12 bits, radio integrada y pines suficientes para el sensor
 
 El enlace es WiFi TCP en el puerto 8080. El nodo sensor crea la red `Riego-Campo` y abre el puerto. El nodo de control se conecta a esa red.
 
-WiFi TCP cumple el requisito de interconectar dos microcontroladores sin cables. El mismo puerto y el mismo mensaje sirven después para la aplicación Android de la EVA2, que entra a la misma red. El alcance que se declara es el de esa red.
+WiFi TCP cumple el requisito de interconectar dos microcontroladores sin cables. El alcance que se declara es el de esa red. La EVA2 no reutiliza este puerto ni esta trama: la app habla HTTP en el puerto 80, con la lectura `LEC` y órdenes firmadas con HMAC-SHA256. Ese enlace queda descrito en el README.
 
 La clave de la red no se escribe en los archivos que se suben. Vive en `secrets.h`, que está en `.gitignore`. En el repositorio solo entra un ejemplo sin clave real.
 

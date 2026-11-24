@@ -78,7 +78,21 @@ gradlew assembleDebug
 hertzbench run firmware/eva2.yaml
 ```
 
-Las rutas del escenario son `./firmware` y `./app/build/outputs/apk/debug/app-debug.apk`, relativas a esa raíz. La última línea esperada es `RESULT: PASS`. Hay que repetir la corrida con un segundo AVD y guardar las dos salidas.
+En Linux, las dos corridas y sus salidas quedan en un solo comando. El argumento es el nombre del segundo dispositivo virtual, distinto de `pixel8`:
+
+```text
+sh simulacion_pruebas/correr_eva2.sh nombre_del_segundo_avd
+```
+
+Las rutas del escenario son `./firmware` y `./app/build/outputs/apk/debug/app-debug.apk`, relativas a esa raíz. La última línea esperada es `RESULT: PASS`. El script guarda `simulacion_pruebas/salidas/hertzbench_pixel8.txt` y `simulacion_pruebas/salidas/hertzbench_<avd>.txt`.
+
+Sin Hertzbench, el protocolo HTTP se comprueba en este repositorio:
+
+```text
+python simulacion_pruebas/simulador_http.py
+```
+
+La última línea esperada es `PRUEBAS OK`. El detalle está en [la matriz de la EVA2](simulacion_pruebas/evidencia_eva2.md).
 
 A mano, en el emulador: clave incorrecta no entra; `demo` / `demo1234` abre el monitoreo. Sin la placa, el texto queda en `Reconectando...`.
 
